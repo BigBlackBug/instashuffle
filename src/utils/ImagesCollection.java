@@ -33,7 +33,7 @@ public class ImagesCollection {
 		collection = db.getCollection(COLLECTION_NAME);
 	}
 	
-	public List<ISImage> getAll(){
+	public List<ISImage> getAllImages(){
 		List<ISImage> images= new ArrayList<>();
 		
 		DBCursor find = collection.find();
@@ -69,6 +69,7 @@ public class ImagesCollection {
 				try {
 					image = ImageIO.read(path);
 				} catch (IOException e) {
+					image = null;
 					return;
 				}
 				Color color = Utils.calculateAverage(Utils.resize(image,
@@ -79,6 +80,8 @@ public class ImagesCollection {
 						new BasicDBObject().append("red", color.getRed())
 								.append("green", color.getGreen())
 								.append("blue", color.getBlue())));
+				image = null;
+				System.out.println("loaded "+path.getAbsolutePath());
 			}
 		}
 	}

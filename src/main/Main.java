@@ -14,7 +14,11 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		ImagesCollection mongo = new ImagesCollection("localhost", 27017);
-		List<ISImage> sourceImages = mongo.getAll();
+//		long before = System.currentTimeMillis();
+//		mongo.loadDatabase(new File("D:\\Files\\Pictures\\"), true);
+//		long diff = System.currentTimeMillis()-before;
+//		System.out.println(diff);
+		List<ISImage> sourceImages = mongo.getAllImages();
 		ImageBucketList buckets = new ImageBucketList(sourceImages);
 		MosaicBuilder builder = new MosaicBuilder(buckets);
 		BufferedImage mosaic = builder.buildMosaic(ImageIO.read(new File(
