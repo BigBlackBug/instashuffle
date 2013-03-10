@@ -1,4 +1,4 @@
-package main;
+package utils;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 public class Utils {
 
@@ -47,6 +48,13 @@ public class Utils {
         g.drawImage(scaledImage, 0, 0, new Color(0,0,0), null);
         g.dispose();
         return scaledImage;
+	}
+
+	public static boolean isImage(String path) {
+		String[] split = path.split("\\.");
+		String ext = split[split.length - 1];
+		return ext.equalsIgnoreCase("png") || ext.equalsIgnoreCase("jpg")
+				|| ext.equalsIgnoreCase("jpeg") || ext.equalsIgnoreCase("bmp");
 	}
 
 }

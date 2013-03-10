@@ -5,12 +5,12 @@ import static java.lang.Math.sqrt;
 import java.awt.Color;
 
 
-public class MyColor {
+public class ISColor {
 
 	private final Color color;
 	private double average = -1;
 	
-	public MyColor(Color color) {
+	public ISColor(Color color) {
 		this.color = color;
 	}
 	

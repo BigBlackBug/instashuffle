@@ -1,22 +1,21 @@
 package comparators;
 
-import java.awt.Color;
 import java.util.Comparator;
 
-import main.MyColor;
-import main.MyImage;
-public class ImageComparator implements Comparator<MyImage>{
+import main.ISColor;
+import main.ISImage;
+public class ImageComparator implements Comparator<ISImage>{
 	
-	private MyColor color;
+	private ISColor color;
 	
-	public ImageComparator(MyColor color) {
+	public ImageComparator(ISColor color) {
 		this.color = color;
 	}
 
 	@Override
-	public int compare(MyImage image1, MyImage image2) {
-		double d1 = MyColor.calculateDistance(image1.getAverageColor().getColor(), color.getColor());
-		double d2 = MyColor.calculateDistance(image2.getAverageColor().getColor(), color.getColor());
+	public int compare(ISImage image1, ISImage image2) {
+		double d1 = ISColor.calculateDistance(image1.getAverageColor().getColor(), color.getColor());
+		double d2 = ISColor.calculateDistance(image2.getAverageColor().getColor(), color.getColor());
 		double diff = d1-d2;
 		return (int) Math.signum(diff);
 	}
