@@ -1,0 +1,9 @@
+.classpath
+.project
+.settings/
+eclipse/
+.gitignore~
+tmp/
+test-result/
+bin/
+target/
