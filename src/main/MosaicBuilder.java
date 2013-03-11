@@ -30,7 +30,6 @@ public class MosaicBuilder {
 		int verSteps = height % pieceHeight == 0 ? height
 				/ pieceHeight : height / pieceHeight + 1;
 		for (int x = 0; x < horSteps; x++) {
-			System.out.println(x);
 			for (int y = 0; y < verSteps; y++) {
 				int widthDiff = (x + 1) * pieceWidth - width;
 				int heightDiff = (y + 1) * pieceHeight - height;

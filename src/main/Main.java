@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,18 +13,25 @@ import utils.ImagesCollection;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		ImagesCollection mongo = new ImagesCollection("localhost", 27017);
-//		long before = System.currentTimeMillis();
-//		mongo.loadDatabase(new File("D:\\Files\\Pictures\\"), true);
-//		long diff = System.currentTimeMillis()-before;
-//		System.out.println(diff);
 		List<ISImage> sourceImages = mongo.getAllImages();
 		ImageBucketList buckets = new ImageBucketList(sourceImages);
-		MosaicBuilder builder = new MosaicBuilder(buckets);
+		long before=System.currentTimeMillis();
+//		MosaicBuilder builder = new MosaicBuilder(buckets);
+		MBT builder = new MBT(buckets);
 		BufferedImage mosaic = builder.buildMosaic(ImageIO.read(new File(
-				"D:\\Files\\Pictures\\Nature\\monkey.jpg")),48,48);
-		ImageIO.write(mosaic, "png", new File("D:\\Files\\Pictures\\Nature\\monkey48.jpg"));
+				"D:\\Files\\Pictures\\Nature\\monkey.jpg")),16,16);
+		long after = System.currentTimeMillis();
+		System.out.println(after-before+" 8 threads");
+		
+		before=System.currentTimeMillis();
+		MosaicBuilder builder2 = new MosaicBuilder(buckets);
+		BufferedImage mosaic2 = builder2.buildMosaic(ImageIO.read(new File(
+				"D:\\Files\\Pictures\\Nature\\monkey.jpg")),16,16);
+		after = System.currentTimeMillis();
+		System.out.println(after-before+" non-threaded");
+//		ImageIO.write(mosaic, "png", new File("D:\\Files\\Pictures\\Nature\\monkey16.jpg"));
 
 	}
 

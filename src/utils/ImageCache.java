@@ -18,7 +18,7 @@ public class ImageCache {
 	
 	private Map<String,BufferedImage> usageMap = new HashMap<>();
 	
-	public BufferedImage get(String key){
+	public synchronized BufferedImage get(String key){
 		BufferedImage image = usageMap.get(key);
 		if(image == null){
 			try {

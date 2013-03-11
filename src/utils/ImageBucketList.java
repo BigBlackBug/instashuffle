@@ -35,7 +35,7 @@ public class ImageBucketList {
 		return buckets;
 	}
 
-	public void put(ISImage image) {
+	public synchronized void put(ISImage image) {
 		ISColor keyColor = image.getAverageColor();
 		TreeSet<ISImage> treeSet = get(keyColor, DEFAULT_THRESHOLD);
 		if (treeSet == null) {
@@ -62,7 +62,7 @@ public class ImageBucketList {
 		return get(new ISColor(Utils.calculateAverage(key)));
 	}
 
-	private TreeSet<ISImage> get(ISColor key, double threshold) {
+	private synchronized TreeSet<ISImage> get(ISColor key, double threshold) {
 		if (threshold == 0) {
 			return buckets.get(key);
 		} else {
